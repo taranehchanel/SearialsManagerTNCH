@@ -1,0 +1,551 @@
+@import "~bootstrap/scss/bootstrap";
+
+/*********************************************/
+/*          Variable         */
+/*********************************************/
+
+$sm: 500px;
+$md: 700px;
+$md2: 800px;
+$ld: 1200px;
+
+$secondary-color: #3498db;
+$secondary-color2: #b6d0f1;
+$body-color: #999999;
+$text-primary: #202020;
+$text-primary2: #565656;
+
+$font-size1: 12px;
+
+@font-face {
+  font-family: 'dana';
+  src: url('./assets/fonts/DanaRegular.ttf');
+}
+
+@font-face {
+  font-family: 'danaFa';
+  src: url('./assets/fonts/DanaFaNumRegular.ttf');
+}
+
+/*********************************************/
+/*              GENERAL CSS                 "/
+/*********************************************/
+
+body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  direction: rtl;
+  font-family: danaFa, serif;
+  // background-color: #f5f7f9;
+  color: $text-primary;
+}
+
+p.main-form-text {
+  font-size: 25px !important;
+  font-weight: 500;
+  color: #494949;
+}
+
+h3 {
+  font-size: 40px;
+  letter-spacing: 10px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+form {
+  position: relative;
+}
+
+/*********************************************/
+/*              Common CSS             */
+/*********************************************/
+
+
+div.formCardViewContainer {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+
+}
+
+div.formCardView {
+  max-width: 800px;
+  min-width: 300px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 40px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+p.formTitle {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+input.formInput {
+  width: 100%;
+}
+
+form select {
+  display: block;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  min-width: 200px;
+  margin: 0 auto;
+  color: $text-primary;
+  font-size: $font-size1;
+  height: 30px;
+}
+
+input.formInputError {
+  border-color: red;
+}
+
+input.formInputButton {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+input.formInputButton:hover {
+  background-color: #3e8e41;
+}
+
+form.serialForm {
+  max-width: 800px;
+  min-width: 250px;
+  width: 100%;
+  margin: 20px;
+}
+
+.serialInputRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: $sm) {
+    flex-direction: column;
+  }
+}
+
+.serialInput {
+  max-width: 300px;
+  min-width: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+/*********************************************/
+/*              Serials CSS             */
+/*********************************************/
+
+.serialsContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  max-width: 1280px;
+  min-height: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.serialsTableContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+  width: 100%;
+  @media (max-width: $md2) {
+    flex-direction: column;
+  }
+}
+
+.serialsTableContainer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.serialsFromToContainer {
+  margin: 0 20px 20px 20px;
+}
+
+.serialsActionContainer {
+  max-width: 800px;
+  min-width: 250px;
+  width: 100%;
+}
+
+.serialActionInputReadOnly {
+  display: block;
+  margin: 0 auto;
+  background-color: #eee;
+  max-width: 400px;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.serialActionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  //@media (max-width: $sm) {
+  //  flex-direction: column;
+  //}
+}
+
+.serialActionIsBoxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  min-width: 250px;
+  width: 100%;
+  margin: 10px 0 40px 0;
+}
+
+.serialActionInput {
+  max-width: 300px;
+  min-width: 200px;
+  margin-bottom: 10px;
+}
+
+.serialActionRegister {
+  background-color: #4CAF50;
+  margin-left: 5px;
+}
+
+.serialActionRegister:hover {
+  background-color: #3e8e41;
+}
+
+.serialActionShow {
+  background-color: #3498db;
+  margin-right: 5px;
+}
+
+.serialActionShow:hover {
+  background-color: #1771a2;
+}
+
+.fromToInput {
+  max-width: 300px;
+  min-width: 200px;
+  margin-bottom: 10px;
+}
+
+
+/*********************************************/
+/*              Grid CSS             */
+/*********************************************/
+
+.serialsGridContainer {
+  border-top: 1px solid #999999;
+  border-right: 1px solid #999999;
+  width: 100%;
+}
+
+.serialsGrid {
+  display: grid;
+  grid-template-columns: 0.4fr 0.4fr 0.7fr 2fr 2fr .7fr .7fr 0.5fr 0.4fr;
+}
+
+.serialsGirdItem {
+  border-left: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+  padding: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: $font-size1;
+}
+
+.serialsGridItemSelected {
+  background-color: $secondary-color2;
+}
+
+.serialButton {
+  border: none;
+  color: #4CAF50;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.serialButton:hover {
+  color: #3e8e41;
+}
+
+.serialCheckBox {
+  height: 20px;
+  width: 20px;
+  margin-top: 4px;
+}
+
+.serialGridImg {
+  height: 20px;
+  width: 20px;
+}
+
+/*********************************************/
+/*              Flex CSS             */
+/*********************************************/
+
+.serialsFlex {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-top: 1px solid #999999;
+  border-right: 1px solid #999999;
+}
+
+.serialsFlexRow {
+  flex: 1;
+  flex-direction: row;
+}
+
+.serialsFlexItem {
+  padding: 5px;
+  text-align: center;
+  overflow: hidden;
+  border-left: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+}
+
+/*********************************************/
+/*              Modal CSS             */
+/*********************************************/
+
+.serialItemModalContainer {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.serialItemModalCentered {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex: 1;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.serialItemModal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+  min-width: 200px;
+  width: 90%;
+  height: 80%;
+  background-color: white;
+  z-index: 10;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.serialItemModalTitle {
+  padding: 20px;
+}
+
+.serialItemModalClose {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: $font-size1;
+  color: $text-primary2;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  align-self: flex-end;
+}
+
+.serialItemModalExcel {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: $font-size1;
+  color: $text-primary2;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  align-self: flex-end;
+}
+
+.serialItemModalGridContainer {
+  border-top: 1px solid #999999;
+  border-right: 1px solid #999999;
+  width: 95%;
+  overflow-y: auto;
+}
+
+.serialItemModalGrid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+}
+
+.serialItemModalGridItem {
+  border-left: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+  padding: 5px;
+  text-align: center;
+  overflow: hidden;
+  font-size: $font-size1;
+}
+
+/*********************************************/
+/*              Pagination CSS              */
+/*********************************************/
+
+.pagination {
+  margin-top: 20px;
+  align-self: center;
+  font-size: $font-size1;
+  font-family: danaFa, serif;
+}
+
+/*********************************************/
+/*              Home CSS              */
+/*********************************************/
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  width: 100%;
+  padding: 40px 0; // بهتره که نباشه اسکرول نمیخوره(Taraneh)
+  margin: 0 auto;
+  @media (max-width: $sm) {
+  }
+}
+
+/*********************************************/
+/*              Other CSS              */
+/*********************************************/
+
+.cButton {
+  height: 45px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+  border-radius: 4px;
+  padding: 0 30px;
+}
+
+table {
+  font-family: danaFa, serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+input {
+  color: $text-primary;
+  font-size: $font-size1;
+  background: #fff;
+  padding: 0 15px;
+  width: 100%;
+  height: 45px;
+  line-height: 46px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: all 0.3s;
+  font-family: danaFa, serif;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid $secondary-color;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

@@ -1,0 +1,39 @@
+{
+  "Result": [
+    {
+      "invid": null,
+      "index": 1,
+      "Id": "85fd11c1-5ffb-ec11-b2af-000c29e47bf3",
+      "Code": null,
+      "Name": null,
+      "kalaId": null,
+      "cnt": 0,
+      "Register": 0,
+      "isSelected": false,
+      "serial": "1L0120244169 TEH-A 044342",
+      "serialTo": null,
+      "checkFromTo": false,
+      "isSerial": 0,
+      "direction": 0,
+      "userid": 0,
+      "category": 0,
+      "persianDate": "1401/04/13",
+      "userName": null,
+      "desc": null,
+      "isbox": false,
+      "packnumber": null,
+      "invtext": null,
+      "Cost": 0,
+      "Inventory": 0,
+      "Store": null,
+      "StoreId": 0,
+      "CStore": null,
+      "Plant": null,
+      "PlantId": 0,
+      "IsReg": false,
+      "Inputtype": 0,
+      "ISNew": false,
+      "SerialStructure": 0
+    }
+  ]
+}
