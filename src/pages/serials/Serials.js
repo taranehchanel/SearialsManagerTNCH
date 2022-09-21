@@ -177,6 +177,7 @@ const Serials = () => {
     }
 
     const onSubmitFromTo = (fromValue, toValue, checkFromTo) => {
+        console.log("newSelectedItem.serial", newSelectedItem.serial);
         // console.log("sdvnhc kjscncj ns;kjdnfv;kj nk;j;kjhn ;");
         let newSelectedItem = {
             ...selectedItem,
