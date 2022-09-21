@@ -8,4 +8,3 @@ export const CreateDeliverPackage = '/api/AvangApi/Create_DeliverPackage';
 export const ShowDeliverPackage = '/api/AvangApi/Show_DeliverPackage';
 export const GetExcel = '/api/AvangApi/GetExcel';
 export const ImportSerial = '/api/AvangApi/ImportSerial';
-
