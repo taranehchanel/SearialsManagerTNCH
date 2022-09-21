@@ -177,6 +177,7 @@ const Serials = () => {
     }
 
     const onSubmitFromTo = (fromValue, toValue, checkFromTo) => {
+        console.log('heyyyyyyyyyyyyyyyyyyyyyy');
         console.log("newSelectedItem.serial", newSelectedItem.serial);
         // console.log("sdvnhc kjscncj ns;kjdnfv;kj nk;j;kjhn ;");
         let newSelectedItem = {
@@ -185,7 +186,7 @@ const Serials = () => {
             serialTo: toValue,
             checkFromTo: (typeof (toValue) === 'undefined' || toValue == null || toValue == '') ? false : true,
         }
-        if (newSelectedItem.serial === "Clear") {
+        if (newSelectedItem.serial === 'Clear') {
             setLoadingImport(false);
             setAllData([]);
             setSelectedItem(null);
@@ -204,7 +205,7 @@ const Serials = () => {
             handleAutoSelectItem();
 
         }
-        else if (newSelectedItem.serial === "Check") {
+        else if (newSelectedItem.serial === 'Check') {
             // newSelectedItem.checkFromTo = true; // زمانی که تکست باکس تا پر شود خودش اوکی میشه نیازی به این کد نیست
             setCheckedId(selectedItem?.Id);
             fromInputRef.current.value = '';
