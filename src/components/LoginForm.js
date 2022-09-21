@@ -46,6 +46,7 @@ const LoginForm = () => {
                 console.log("username :", userName);
                 // toast.success("لاگین با موفقیت انجام شد ");
                 navigate("../serials", { replace: true, state: { desc: desc, userName: userName, title: desc == Enums.Desc.hamkaran ? userName : result.data.userName } });
+                // console.log("desc,", desc);
                 localStorage.setItem(storageKeys.desc, desc);
 
             }).catch(error => {

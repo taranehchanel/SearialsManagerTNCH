@@ -178,7 +178,6 @@ const Serials = () => {
 
     const onSubmitFromTo = (fromValue, toValue, checkFromTo) => {
         console.log('heyyyyyyyyyyyyyyyyyyyyyy');
-        console.log("newSelectedItem.serial", newSelectedItem.serial);
         // console.log("sdvnhc kjscncj ns;kjdnfv;kj nk;j;kjhn ;");
         let newSelectedItem = {
             ...selectedItem,
@@ -186,6 +185,8 @@ const Serials = () => {
             serialTo: toValue,
             checkFromTo: (typeof (toValue) === 'undefined' || toValue == null || toValue == '') ? false : true,
         }
+        console.log("newSelectedItem.serial", newSelectedItem.serial);
+
         if (newSelectedItem.serial === 'Clear') {
             setLoadingImport(false);
             setAllData([]);
