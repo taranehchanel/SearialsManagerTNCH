@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 
 
-const SerialsActions = ({ item, updateItem }) => {
+const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
     const [boxNumberError, setBoxNumberError] = useState(false)
     // const { state: { type } = {} } = useLocation();
     const checkBoxNumber = () => {
@@ -28,10 +28,10 @@ const SerialsActions = ({ item, updateItem }) => {
         //     })
         // }
         createDeliverPackage(item, item.packnumber, item.Inputtype).then((result) => {
-            console.log("result",result);
-            console.log("result.data",result.data);
-            console.log("result.data.suc",result.data.suc);
-            console.log("result.data.reg",result.data.reg);
+            console.log("result", result);
+            console.log("result.data", result.data);
+            console.log("result.data.suc", result.data.suc);
+            console.log("result.data.reg", result.data.reg);
             // console.log("result.data.Data.obj.reg",result.data.Data.obj.reg);
             // console.log("result.data.Data.obj.suc",result.data.Data.obj.suc);
 
@@ -93,6 +93,7 @@ const SerialsActions = ({ item, updateItem }) => {
                 value={item.invtext}
                 type="text"
                 readOnly={true}
+                ref={serialReadOnlyInputRef}
             />
             {item.isbox && (
                 <div className={'serialActionIsBoxContainer'}>

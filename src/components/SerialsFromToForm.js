@@ -3,7 +3,7 @@ import { NavItem } from 'react-bootstrap';
 import { importSerial } from '../api';
 import { ImportSerial } from '../api/apiUrl';
 
-const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loadingImport, allData }) => {
+const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loadingImport, allData, fromInputRef }) => {
     const [fromValue, setFromValue] = useState('');
     const [toValue, setToValue] = useState('');
     const [fromError, setFromError] = useState(false);
@@ -11,7 +11,7 @@ const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loa
     // const [checkFromTo, setCheckFromTo] = useState(false);
 
 
-    const fromInputRef = useRef(null);
+    // const fromInputRef = useRef(null);
 
     useEffect(() => {
         if (selectedItem) {

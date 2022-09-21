@@ -101,12 +101,13 @@ const SerialsGridView = ({
                                     <img src={list} style={{ height: 40, width: 40 }} alt={''} />
                                 </div>
                             </div>
-                            <div className={cName}>
+                            <div key={checkedId} className={cName}>
                                 {(item.cnt > 1 && item.Id === selectedRowId) && (
                                     <input
                                         className={'serialCheckBox'}
                                         type="checkbox"
-                                        defaultChecked={item.Id === checkedId}
+                                        // defaultChecked={item.Id === checkedId}
+                                        value={item.Id === checkedId}
                                         onChange={(e) => onToggleCheck(item.Id)}
                                     />)
                                 }

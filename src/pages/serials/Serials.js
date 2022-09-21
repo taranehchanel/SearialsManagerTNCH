@@ -12,49 +12,57 @@ import { gridData } from "../../res/fakeData";
 import SerialsFromToForm from "../../components/SerialsFromToForm";
 import { getInvocher, getSerialsList, importSerial } from "../../api";
 import { ToastContainer, toast } from 'react-toastify';
+import { InputGroup } from 'react-bootstrap';
 
 
 const Serials = () => {
-    const { state: { desc, userName, title } = {} } = useLocation();
-    const [modalData, setModalData] = useState({ isVisible: false, data: [] })
+    const { state: { desc, userName, title } = {} } = useLocation(); // پراپز هایی که پاس دادیم به صفحه را دریافت میکند
+    const [modalData, setModalData] = useState({ isVisible: false, data: [] }) // مدال
     const [isVisibleAboutModal, setIsVisibleAboutModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [allData, setAllData] = useState([]);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [checkedId, setCheckedId] = useState(null);
-    const [checkFromTo, setCheckFromTo] = useState(false);
-    const [register, setRegister] = useState(0);  //new
+    const [data, setData] = useState([]); // مخصوص هر صفحه است  pageData  در اصل
+    const [allData, setAllData] = useState([]); // کل دیتای همه صفحات
+    const [selectedItem, setSelectedItem] = useState(null); // ردیفی که انتخاب میشود و آبی میشود
+    const [checkedId, setCheckedId] = useState(null); // برای چک باکس
+    const [checkFromTo, setCheckFromTo] = useState(false);  // استفاده نشده
+    const [register, setRegister] = useState(0);  //new    //  استفاده نشده  
     const [loadingImport, setLoadingImport] = useState(false);
-    const [forcePage, setForcePage] = useState(0);
+    const [forcePage, setForcePage] = useState(0); // برای صفحه بندی که میگرده دنبال رکورد با فلش
     const [productCode, setProductCode] = useState("");
 
 
-    const isCrm = useRef(desc === Enums.Desc.crm).current;
-    const pageInfo = useRef({ pageNumber: 0, pageCount: 0 });
-    const serialInputRef = useRef();
-    const isFirstTime = useRef(true);
+    const isCrm = useRef(desc === Enums.Desc.crm).current;   // برای نگهداری متغیر و تغییر آن
+    const pageInfo = useRef({ pageNumber: 0, pageCount: 0 }); //  اطلاعات صفحه بندی
+    const serialInputRef = useRef(); // خود اینپوت را ذخیره میکنیم که به توابع آن مثل فوکس دسترسی داشته باشیم
+    const isFirstTime = useRef(true); // اولین باری است که کامپوننت اومده بالا
     const isFirstApiTime = useRef(true);
-    const lastImportIndex = useRef(null);
+    const lastImportIndex = useRef(null); // وقتی یک ردیف انتخاب میکردیم و بعد باید میرفت ردیف های رو به جلو
+    const serialReadOnlyInputRef = useRef();
+    const fromInputRef = useRef(null);
 
 
-    useEffect(() => {
+
+    useEffect(() => {   // بعد از رندر کامپوننت یکبار اجرا میشود تابع داخل آن
         handleAutoSelectItem();
-    }, [data])
+    }, [data]) //data دیپندنسی این یوزافکت است
+    //آرایه ای از دیپندنسی ها میگیره
 
 
-    const handleAutoSelectItem = () => {
+    const handleAutoSelectItem = () => { // میگردد دنبال اولین رکوردی که قابل سلکت هست و
+        // اگر هیچ ردیفی نبود برای انتخاب جدول حذف میشوند 
+        //  هر ردیف که انتخاب شد و کارش تموم شد میره ردیف بعدی که قابل انتخاب باشه
         // if (isCrm) {
         //     setSelectedItem(data?.[0]);
         // } else {
-        let hasFound = false;
-        for (let d of data) {
+        let hasFound = false; // آیا پیدا شد یا نه
+        for (let d of data) { // دیتای همون صفحه data
             if (lastImportIndex.current && lastImportIndex.current > d.index) {
                 continue;
             }
-            if (d.cnt > d.Register) {
+            if (d.cnt > d.Register) {   // اگر تعداد بیشتر از ثبت شده باشد،
                 hasFound = true;
                 setSelectedItem(d);
+                console.log('FFOUNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNND : ', d.index);
                 isFirstTime.current = false;
                 isFirstApiTime.current = false;
                 setRegister(d.Register); //new
@@ -65,19 +73,19 @@ const Serials = () => {
         if (!hasFound) {
             const isLastPage = pageInfo.current.pageCount === pageInfo.current.pageNumber + 1;
             setSelectedItem(null);
-            if (isLastPage && lastImportIndex.current !== null) {
+            if (isLastPage && lastImportIndex.current !== null) {  //اگر آخرین صفحه باشه یعنی یک ردیف ایمپورت شده 
                 lastImportIndex.current = null;
-                if (pageInfo.current.pageNumber !== 0) {
-                    setForcePage(0);
+                if (pageInfo.current.pageNumber !== 0) { // اگر اولین صفحه نبود 
+                    setForcePage(0);  // میره صفحه اول
                 } else {
-                    handleAutoSelectItem();
+                    handleAutoSelectItem(); // تابع بازگشتی میشود
                     return;
                 }
             }
             lastImportIndex.current = null;
 
             if (data.length > 0) {
-                if (isLastPage) {
+                if (isLastPage) {  // آخرین صفحه هست
                     let hasFoundInAll = false;
                     for (let a of allData) {
                         if (a.cnt > a.Register) {
@@ -85,14 +93,14 @@ const Serials = () => {
                             break;
                         }
                     }
-                    if (!hasFoundInAll && !isFirstApiTime.current) {
+                    if (!hasFoundInAll && !isFirstApiTime.current) { //اگر هیچ ردیفی پیدا نشد و اولین بار هم نبود، جدول را حذف میکنیم
                         console.log('noooooooo selectable item \ndata deleted');
                         setAllData([]);
                         serialInputRef.current?.focus();
                         serialInputRef.current.value = '';
                     }
                 } else if (isFirstTime.current) {
-                    setForcePage(pageInfo.current.pageNumber + 1);
+                    setForcePage(pageInfo.current.pageNumber + 1); // برای اولین بار اینکار انجام میشود که برود صفحه بعدی
                 }
             }
         }
@@ -176,36 +184,67 @@ const Serials = () => {
             serialTo: toValue,
             checkFromTo: (typeof (toValue) === 'undefined' || toValue == null || toValue == '') ? false : true,
         }
-
-        setLoadingImport(true);
-        importSerial(newSelectedItem).then(result => {
-            lastImportIndex.current = newSelectedItem.index;
-         console.log("result.data.reg",result?.data.reg);
+        if (newSelectedItem.serial === "Clear") {
             setLoadingImport(false);
-            const newAllData = [...allData];
-            const selectedItemIndex = allData.findIndex(i => i.Id == newSelectedItem.Id);
-            newAllData.splice(selectedItemIndex, 1, {
-                ...newSelectedItem,
-                Register: newSelectedItem.Register + result?.data.reg,
-            });
-            setAllData(newAllData);
+            setAllData([]);
+            setSelectedItem(null);
+            serialInputRef.current?.focus();
+            serialInputRef.current.value = '';
+            // serialReadOnlyInputRef.current. ;
+            return;
+        }
+        else if (newSelectedItem.serial === "Next Record") {
+            lastImportIndex.current = newSelectedItem.index + 1;
+            console.log('laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaast :', lastImportIndex.current)
+            handleAutoSelectItem();
+        }
+        else if (newSelectedItem.serial === "Previous Record") {
+            lastImportIndex.current = newSelectedItem.index - 1;
+            handleAutoSelectItem();
 
-            setRegister(newSelectedItem?.Register + result?.data.reg);
-
-            setSelectedItem(current => {
-                return {
-                    ...current,
-                    serial: fromValue,
-                    serialTo: toValue,
-                    checkFromTo: (typeof (toValue) === 'undefined' || toValue == null || toValue == '') ? false : true,
-                }
-            })
-            toast.success('عملیات موفق بود ');
-        })
-            .catch(error => {
+        }
+        else if (newSelectedItem.serial === "Check") {
+            // newSelectedItem.checkFromTo = true; // زمانی که تکست باکس تا پر شود خودش اوکی میشه نیازی به این کد نیست
+            setCheckedId(selectedItem?.Id);
+            fromInputRef.current.value = '';
+            return;
+        }
+        else if (newSelectedItem.serial === "UnCheck") {
+            setCheckedId(null);
+            fromInputRef.current.value = '';
+            // newSelectedItem.checkFromTo = false;
+            return;
+        } else {
+            setLoadingImport(true);
+            importSerial(newSelectedItem).then(result => {
+                lastImportIndex.current = newSelectedItem.index;
+                console.log("result.data.reg", result?.data.reg);
                 setLoadingImport(false);
-                toast.error(error.response.data.Message);
+                const newAllData = [...allData];
+                const selectedItemIndex = allData.findIndex(i => i.Id == newSelectedItem.Id);
+                newAllData.splice(selectedItemIndex, 1, {
+                    ...newSelectedItem,
+                    Register: newSelectedItem.Register + result?.data.reg,
+                });
+                setAllData(newAllData);
+
+                setRegister(newSelectedItem?.Register + result?.data.reg);
+
+                setSelectedItem(current => {
+                    return {
+                        ...current,
+                        serial: fromValue,
+                        serialTo: toValue,
+                        checkFromTo: (typeof (toValue) === 'undefined' || toValue == null || toValue == '') ? false : true,
+                    }
+                })
+                toast.success('عملیات موفق بود ');
             })
+                .catch(error => {
+                    setLoadingImport(false);
+                    toast.error(error.response.data.Message);
+                })
+        }
     }
 
     return (
@@ -218,12 +257,14 @@ const Serials = () => {
                     isCrm={isCrm}
                     serialInputRef={serialInputRef} />
                 {selectedItem && (
-                    <SerialsActions item={selectedItem} updateItem={value => setSelectedItem(current => {
-                        return {
-                            ...current,
-                            packnumber: value
-                        }
-                    })} />
+                    <SerialsActions item={selectedItem}
+                        serialReadOnlyInputRef={serialReadOnlyInputRef}
+                        updateItem={value => setSelectedItem(current => {
+                            return {
+                                ...current,
+                                packnumber: value
+                            }
+                        })} />
                 )}
 
                 {loading ?
@@ -239,6 +280,7 @@ const Serials = () => {
                                 selectedItem={selectedItem}
                                 loadingImport={loadingImport}
                                 allData={allData}
+                                fromInputRef={fromInputRef}
                             />
                         )}
 
@@ -254,7 +296,6 @@ const Serials = () => {
                                 setCheckFromTo={setCheckFromTo}
                                 checkFromTo={checkFromTo}
                                 onToggleCheck={onToggleCheck}
-
                             />
                             <SerialsPaginate
                                 setData={setData}
