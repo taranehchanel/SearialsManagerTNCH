@@ -47,8 +47,11 @@ const Serials = () => {
     }, [data]) //data دیپندنسی این یوزافکت است
     //آرایه ای از دیپندنسی ها میگیره
 
+    const handleAutoSelectItemReverse = () => {
 
-    const handleAutoSelectItem = () => { // میگردد دنبال اولین رکوردی که قابل سلکت هست و
+    }
+
+    const handleAutoSelectItem = () => {  // میگردد دنبال اولین رکوردی که قابل سلکت هست و
         // اگر هیچ ردیفی نبود برای انتخاب جدول حذف میشوند 
         //  هر ردیف که انتخاب شد و کارش تموم شد میره ردیف بعدی که قابل انتخاب باشه
         // if (isCrm) {
@@ -203,7 +206,7 @@ const Serials = () => {
         }
         else if (newSelectedItem.serial === "Previous Record") {
             lastImportIndex.current = newSelectedItem.index - 1;
-            handleAutoSelectItem();
+            handleAutoSelectItemReverse();
 
         }
         else if (newSelectedItem.serial === 'Check') {

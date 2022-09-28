@@ -107,7 +107,7 @@ const SerialsGridView = ({
                                         className={'serialCheckBox'}
                                         type="checkbox"
                                         // defaultChecked={item.Id === checkedId}
-                                        value={item.Id === checkedId}
+                                        checked={item.Id === checkedId}
                                         onChange={(e) => onToggleCheck(item.Id)}
                                     />)
                                 }

@@ -1,7 +1,14 @@
 {
   "short_name": "React App",
   "name": "Create React App Sample",
-  "icons": [],
+  // "icons":[], ابتدا به این شکل بود
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64*64 32*32 24*24 16*16",
+      "type": "image/x-icon"
+    } //فعلا بی خودی نوشتم اینو
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
