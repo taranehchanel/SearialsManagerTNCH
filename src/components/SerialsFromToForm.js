@@ -21,6 +21,7 @@ const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loa
 
     useEffect(() => {
         fromInputRef.current.value = '';
+        // toInputRef.current.value = '';
         setFromValue('');
         setToValue('');
     }, [allData, selectedItem])
@@ -44,6 +45,9 @@ const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loa
             setToError(false);
             const _toValue = checkedId === selectedItem.Id ? toValue : '';
             onSubmitFromTo(fromValue, _toValue);
+            fromInputRef.current.value = '';  // باید خالی بشه بعد از ورود و اینتر زدن 09/02
+            // toInputRef.current.value = '';  // باید خالی بشه بعد از ورود و اینتر زدن 09/21
+
         } else {
             if (fromValue === '') {
                 setFromError(true);
@@ -61,6 +65,9 @@ const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loa
     const handleEnterSubmit = (e) => {
         if (e.key === 'Enter') {
             handleSubmit(e);
+            fromInputRef.current.value = '';  //  باید خالی بشه بعد از ورود و اینتر زدن 09/02
+            // toInputRef.current.value = '';  //  باید خالی بشه بعد از ورود و اینتر زدن 09/21
+            // fromInputRef.current?.focus(); //09/21
             e.preventDefault();
         }
     }
@@ -91,6 +98,7 @@ const SerialsFromToForm = ({ checkedId, count, onSubmitFromTo, selectedItem, loa
             />
 
             {checkedId === selectedItem.Id && <input
+                // ref={toInputRef}
                 className={'fromToInput'}
                 onKeyDown={handleEnterSubmit}
                 onChange={onChangeToValue}

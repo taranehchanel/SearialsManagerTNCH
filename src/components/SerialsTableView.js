@@ -3,7 +3,7 @@ import React from 'react';
 const serialsTitles = [
     '',
     '',
-    'انبار',
+    'کد انبار',
     'کد کالا',
     'نام کالا',
     'تعداد',
@@ -12,13 +12,13 @@ const serialsTitles = [
     'از\nتا',
 ]
 
-const SerialsTableView = ({data}) => {
+const SerialsTableView = ({ data }) => {
     return (
         <table>
             <tr>
                 {serialsTitles.map((item, index) => {
                     return (
-                        <th key={index}>{item}</th>
+                        <th key={index} >{item}</th>
                     )
                 })}
             </tr>

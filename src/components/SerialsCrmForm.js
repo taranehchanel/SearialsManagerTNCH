@@ -7,13 +7,14 @@ const SerialsCrmForm = ({ onSubmitCrmForm, isCrm, serialInputRef }) => {
         { id: 3, name: 'شماره پرونده' },
         { id: 4, name: 'شماره موبایل' },
         { id: 5, name: 'ثبت سند انبار' },
+        { id: 6, name: 'انبارگردانی' },
     ]).current;
 
     const [type, setType] = useState(types[0]);
     const [typeValue, setTypeValue] = useState('');
     const [typeValueError, setTypeValueError] = useState(false);
     // const [crm, setCrm] = useState(2);
-    
+
 
 
     const handleSubmit = (e) => {
@@ -63,6 +64,7 @@ const SerialsCrmForm = ({ onSubmitCrmForm, isCrm, serialInputRef }) => {
                     id="typeValue"
                     name="typeValue"
                     placeholder={"لطفا " + type.name + " را وارد نمایید"}
+                    autoFocus={true}
                 />
             </div>
         </form>
