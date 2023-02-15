@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import ReactPaginate from "react-paginate"; // از این کتابخانه استفاده شده در داکیومنتش هست
 
-const pageSize = 15;
+const pageSize = 150;
 
 const SerialsPaginate = ({ setData, allData, forcePage, setPageInfo }) => {
-    const [pageCount, setPageCount] = useState(0);
+    const [pageCount, setPageCount] = useState(0); // تعداد کل صفحات رانگه و آپدیت میکنیم
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
-    const [itemOffset, setItemOffset] = useState(0);
-    const [pageNumber, setPageNumber] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);  // صفحه اول 15 تا بود مثلا میریم صفحه دوم، آیتمآفست تعداد قبلی را نشان میدهد یعنی تعداد آیتمهای صفحه قبل
+    const [pageNumber, setPageNumber] = useState(0); // شماره صفحه فعلی
 
 
     useEffect(() => {
@@ -20,13 +20,14 @@ const SerialsPaginate = ({ setData, allData, forcePage, setPageInfo }) => {
         const pageCount = Math.ceil(allData.length / pageSize);
         setPageCount(pageCount);
         setPageInfo && setPageInfo({ pageCount });
-        console.log({allData});
-    }, [itemOffset, allData]);
+        console.log({ allData });
+    }, [itemOffset, allData]); //جایی که کل داده ها تغییر کند لاجیک داخل این یوزافکت کال میشود
+    //و بعد داخلش ما ست دیتا میکنیم یعنی عوض شدن آلدیتا باعث عوض شدن ست دیتا میشودو توی یوزافکتهایی که در سریالز نوشته بودیم اونجا لاجیک های داخل یوزافکت اجرا میشود
 
 
-    useEffect(() => {
+    useEffect(() => { //برای اینه که ما مجبورش کنیم بره صفحه بعدی، قبلی، هرجایی
         if (forcePage !== undefined) {
-            handlePageClick({ selected: forcePage });
+            handlePageClick({ selected: forcePage }); // لاجیک خود کتابخانه است
         }
     }, [forcePage]);
 

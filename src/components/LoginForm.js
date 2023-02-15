@@ -62,7 +62,7 @@ const LoginForm = () => {
     return (
         <div className='formCardViewContainer'>
             <div className='formCardView'>
-                <p className='formTitle'>سیستم انبار آونگ</p>
+                <p className='formTitle'>سیستم مدیریت سریال آونگ</p>
                 <span className='formTitle'>
                     <i className="bi bi-bootstrap-fill" />
                 </span>

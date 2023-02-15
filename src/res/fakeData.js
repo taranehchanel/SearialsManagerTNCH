@@ -1,4 +1,6 @@
 export const girdModalDataTitles = ['ردیف', 'سریال', 'تاریخ'];
+// export const girdModalDataPrintTitles = ['سریال'];
+
 
 // const makeModalData = (count) => {
 //     const data = [];
@@ -15,6 +17,18 @@ export const girdModalDataTitles = ['ردیف', 'سریال', 'تاریخ'];
 // export const girdModalData = makeModalData(50);
 
 export const girdDataTitles = [
+    '',
+    '',
+    'انبار',
+    'کد کالا',
+    'نام کالا',
+    'تعداد',
+    'ثبت شده',
+    '',
+    'پرینت',
+    'از تا',
+];
+export const crmGridDataTitles = [
     '',
     '',
     'انبار',

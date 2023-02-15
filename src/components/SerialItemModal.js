@@ -4,9 +4,9 @@ import SerialsPaginate from "./SerialsPaginate";
 import { CSVLink } from 'react-csv';
 
 
-const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode }) => {
-    const [allModalData] = useState(allData?.data?.Data?.Result ?? []);
-    const [data, setData] = useState([]);
+const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode, productName,fromInputRef }) => {
+    const [allModalData] = useState(allData?.data?.Data?.Result ?? []); // کل داده ها
+    const [data, setData] = useState([]); // دیتایی که در هر صفحه هست
 
 
     // const onExcelPress = (data: any) => {
@@ -16,7 +16,8 @@ const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode }) =
     useEffect(() => {
         const close = (e) => {
             if (e.keyCode === 27) {
-                onCloseModal()
+                onCloseModal();
+                fromInputRef.current?.focus();  //new yalda
             }
         }
         window.addEventListener('keydown', close)
@@ -35,8 +36,8 @@ const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode }) =
     ];
 
     var result = [];
-    for (let d of data) {
-        if (data !== null) {
+    for (let d of allModalData) {
+        if (allModalData !== null) {
             result.push({ index: d.index, serial: d.serial, persianDate: d.persianDate });
         }
     }
@@ -53,6 +54,8 @@ const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode }) =
             <div className='serialItemModalCentered'>
                 <div className='serialItemModal'>
                     <p className='serialItemModalTitle'>{`سریال های ثبت شده کد کالا : ${productCode}`}</p>
+                    <p className='serialItemModalTitle' style={{ paddingTop: "initial" }}>{`نام کالا : ${productName}`} </p>
+
                     {/* <p className='serialItemModalTitle'>{`سریال های ثبت شده کد کالا : ${data[0]?.Code}`}</p> */}
 
 
@@ -66,7 +69,7 @@ const SerialItemModal = ({ allData, onClosePress, onCloseModal, productCode }) =
                         <div className='serialItemModalGrid'>
                             {girdModalDataTitles.map((item, index) => {
                                 return (
-                                    <div key={index} className="serialItemModalGridItem">{item}</div>
+                                    <div style={{ fontWeight: "bold" }} key={index} className="serialItemModalGridItem">{item}</div>
                                 )
                             })}
                             {data.map((item) => {

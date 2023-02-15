@@ -3,7 +3,7 @@ import React from 'react';
 const serialsTitles = [
     'ردیف',
     '',
-    'انبار',
+    'کد انبار',
     'کد کالا',
     'نام کالا',
     'تعداد',

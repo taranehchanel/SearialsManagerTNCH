@@ -1,11 +1,14 @@
 import React, { useRef, createRef } from 'react';
-import { girdDataTitles } from "../res/fakeData";
+import { girdDataTitles, crmGridDataTitles } from "../res/fakeData";
 import list from "../assets/images/list.png";
+import print from "../assets/images/print.png";
 
-const SerialsGridView = ({
+
+const SerialsGridView = ({ // میشد با فلکس هم هندل بشه
     isCrm,
     data,
-    onDetailPress,
+    onDetailPress,  // برای مدال اول
+    onSerialPrintPress,  // برای مدال دوم
     onSelectRow,
     selectedRowId,
     checkedId,
@@ -13,7 +16,7 @@ const SerialsGridView = ({
     checkFromTo,
 }) => {
 
-    const scrollRefs = useRef([]);
+    const scrollRefs = useRef([]); //نیازی نیست این باشه
     if (scrollRefs.current.length === 0) {
         for (let i = 0; i < data.length; i++) {
             scrollRefs.current.push(createRef());
@@ -62,10 +65,10 @@ const SerialsGridView = ({
 
     return (
         <div className='serialsGridContainer'>
-            <div className='serialsGrid'>
-                {girdDataTitles.map((item, index) => {
+            <div className={isCrm ? 'crmSerialsGrid' : 'serialsGrid'}>
+                {(isCrm ? crmGridDataTitles : girdDataTitles).map((item, index) => {
                     return (
-                        <div key={index} className="serialsGirdItem">{item}</div>
+                        <div style={{ fontWeight: "bold" }} key={index} className="serialsGirdItem">{item}</div>
                     )
                 })}
                 {data.map((item) => {
@@ -80,7 +83,7 @@ const SerialsGridView = ({
                                 {
                                     // (item.cnt > item.Register) &&
                                     // <div ref={scrollRefs.current[index]} className='serialButton'
-                                    (item.cnt > item.Register) &&
+                                    (isCrm || item.cnt > item.Register) &&
                                     <div className='serialButton'
                                         onClick={() => onRowSelect(item)}>
                                         <img src={require("../assets/images/arrow.png")} className={'serialGridImg'}
@@ -97,12 +100,20 @@ const SerialsGridView = ({
                             <div className={cName}>{item.cnt}</div>
                             <div className={cName}>{item.Register}</div>
                             <div className={cName}>
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                 <div className='serialButton' onClick={() => onDetailPress(item)}>
                                     <img src={list} style={{ height: 40, width: 40 }} alt={''} />
                                 </div>
                             </div>
+                            {!isCrm && (
+                                <div className={cName}>
+                                    <div className='serialButton' onClick={() => onSerialPrintPress(item)}>
+                                        <img src={print} style={{ height: 40, width: 40 }} alt={''} />
+                                    </div>
+                                </div>
+                            )}
                             <div key={checkedId} className={cName}>
-                                {(item.cnt > 1 && item.Id === selectedRowId) && (
+                                {(item.cnt > 1 && item.Id === selectedRowId && item.cnt > item.Register) && (
                                     <input
                                         className={'serialCheckBox'}
                                         type="checkbox"

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { createDeliverPackage, showDeliverPackage } from "../api";
 import { useLocation } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify';
 
 
-const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
+const SerialsActions = ({ item, packnumber, updateItem, serialReadOnlyInputRef }) => {
     const [boxNumberError, setBoxNumberError] = useState(false)
     // const { state: { type } = {} } = useLocation();
     const checkBoxNumber = () => {
@@ -17,6 +17,7 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
         }
     }
 
+    console.log("BBBBBBBBefore CCCCCreate item.packnumber", packnumber);
 
     // crmClick
     const onRegisterClick = () => {
@@ -28,12 +29,10 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
         //     })
         // }
         createDeliverPackage(item, item.packnumber, item.Inputtype).then((result) => {
-            console.log("result", result);
-            console.log("result.data", result.data);
-            console.log("result.data.suc", result.data.suc);
-            console.log("result.data.reg", result.data.reg);
-            // console.log("result.data.Data.obj.reg",result.data.Data.obj.reg);
-            // console.log("result.data.Data.obj.suc",result.data.Data.obj.suc);
+            // console.log("result", result);
+            // console.log("result.data", result.data);
+            // console.log("result.data.suc", result.data.suc);
+            // console.log("result.data.reg", result.data.reg);
 
             if (result.data) {
                 if (result.data.suc === true) {
@@ -54,7 +53,7 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
         })
     };
 
-    // console.log("item.packnumber", item.packnumber, result.Data.reg);
+    console.log("AAAAAfter CCreate item.packnumber", packnumber);
 
     //ShowcrmClick
     const onShowClick = () => {
@@ -65,7 +64,7 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
 
         //     })
         // }
-
+        console.log('item.packnumber', packnumber);
         if (item.packnumber !== null) {
             showDeliverPackage(item.packnumber).then((result) => {
                 if (result.data) {
@@ -94,6 +93,7 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
                 type="text"
                 readOnly={true}
                 ref={serialReadOnlyInputRef}
+                style={{ fontSize: "inherit" }}
             />
             {item.isbox && (
                 <div className={'serialActionIsBoxContainer'}>
@@ -104,7 +104,7 @@ const SerialsActions = ({ item, updateItem, serialReadOnlyInputRef }) => {
                         type="text"
                         id="boxNumber"
                         name="boxNumber"
-                        value={item.packnumber}
+                        value={packnumber}
                         placeholder='شماره بسته را وارد کنید'
                     />
 
